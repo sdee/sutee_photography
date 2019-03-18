@@ -32,15 +32,12 @@ const BG = styled.div`
   background-color: ${props => props.theme.colors.bg};
 `
 
-const Index = ({
-  data: {
-    allMdx: { edges },
-  },
-}) => (
+const Index = (props) => (
   <Layout>
     <BG>
       <Content>
-        <Grid>
+        {console.log(props)}
+        {/* <Grid>
           {edges.map((project, index) => (
             <Card
               delay={index}
@@ -52,7 +49,7 @@ const Index = ({
               key={project.node.fields.slug}
             />
           ))}
-        </Grid>
+        </Grid> */}
       </Content>
     </BG>
   </Layout>
@@ -68,28 +65,43 @@ Index.propTypes = {
   }).isRequired,
 }
 
+// export const pageQuery = graphql`
+//   query HomeQuery {
+//     allMdx(sort: { fields: [frontmatter___date], order: DESC }) {
+//       edges {
+//         node {
+//           fields {
+//             slug
+//           }
+//           frontmatter {
+//             cover {
+//               childImageSharp {
+//                 fluid(maxWidth: 760, quality: 90) {
+//                   ...GatsbyImageSharpFluid_withWebp
+//                 }
+//               }
+//             }
+//             date(formatString: "DD.MM.YYYY")
+//             title
+//             areas
+//           }
+//         }
+//       }
+//     }
+//   }
+
 export const pageQuery = graphql`
   query HomeQuery {
-    allMdx(sort: { fields: [frontmatter___date], order: DESC }) {
-      edges {
-        node {
-          fields {
-            slug
-          }
-          frontmatter {
-            cover {
-              childImageSharp {
-                fluid(maxWidth: 760, quality: 90) {
-                  ...GatsbyImageSharpFluid_withWebp
-                }
-              }
-            }
-            date(formatString: "DD.MM.YYYY")
-            title
-            areas
-          }
-        }
+  allS3Image {
+    edges {
+      node {
+        Key
+        Url
       }
     }
   }
+  }
+    
+  
 `
+

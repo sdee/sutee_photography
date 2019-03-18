@@ -57,5 +57,13 @@ module.exports = {
     },
     'gatsby-plugin-offline',
     'gatsby-plugin-netlify',
+    {
+      resolve: 'gatsby-source-s3-image',
+      options: {
+        bucketName: 'sutee-dee-photos',
+        domain: null, // Not necessary to define here for AWS S3; defaults to `s3.amazonaws.com`
+        protocol: 'https',
+      },
+    },
   ],
 }
