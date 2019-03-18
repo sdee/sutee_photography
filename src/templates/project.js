@@ -31,14 +31,6 @@ const Project = ({ pageContext: { slug, prev, next }, data: { project: postNode,
   return (
     <Layout customSEO>
       <SEO postPath={slug} postNode={postNode} postSEO />
-      <ProjectHeader
-        avatar={config.avatar}
-        name={config.name}
-        date={project.date}
-        title={project.title}
-        areas={project.areas}
-        text={postNode.code.body}
-      />
       <BG>
         <OuterWrapper>
           <InnerWrapper>
