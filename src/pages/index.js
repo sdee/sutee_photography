@@ -32,11 +32,19 @@ const BG = styled.div`
   background-color: ${props => props.theme.colors.bg};
 `
 
-const Index = (props) => (
+const Index = ({
+  data: {
+    images: { edges },
+  },
+}) => (
+  
   <Layout>
     <BG>
       <Content>
-        <Img fixed={props.data.images.edges[0].node.localFile.childImageSharp.fixed} />
+       {console.log(edges)}
+      {edges.map((img, idx) => (
+        <Img fixed={img.node.localFile.childImageSharp.fixed} />
+          ))}
       </Content>
     </BG>
   </Layout>
