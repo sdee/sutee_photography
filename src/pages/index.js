@@ -65,34 +65,9 @@ Index.propTypes = {
   }).isRequired,
 }
 
-// export const pageQuery = graphql`
-//   query HomeQuery {
-//     allMdx(sort: { fields: [frontmatter___date], order: DESC }) {
-//       edges {
-//         node {
-//           fields {
-//             slug
-//           }
-//           frontmatter {
-//             cover {
-//               childImageSharp {
-//                 fluid(maxWidth: 760, quality: 90) {
-//                   ...GatsbyImageSharpFluid_withWebp
-//                 }
-//               }
-//             }
-//             date(formatString: "DD.MM.YYYY")
-//             title
-//             areas
-//           }
-//         }
-//       }
-//     }
-//   }
-
 export const pageQuery = graphql`
-  query HomeQuery {
-  allS3Image {
+query IndexQuery {
+  images:allS3Image {
     edges {
       node {
         Key
@@ -100,8 +75,6 @@ export const pageQuery = graphql`
       }
     }
   }
-  }
-    
-  
-`
+} 
+`;
 
