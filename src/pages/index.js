@@ -62,10 +62,10 @@ Index.propTypes = {
 
 export const pageQuery = graphql`
 query IndexQuery {
-  images:allS3Image {
+  images:allS3Image (filter:{Url:{regex:"/.*places.*/"}}) {
     edges {
       node {
-          Url
+          Url 
           Key
           localFile {
             childImageSharp {
