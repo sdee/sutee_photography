@@ -63,13 +63,12 @@ query IndexQuery {
             childImageSharp {
                 fixed(width: 800, height: 534) {
                   ...GatsbyImageSharpFixed
-              }
+                }
             }
-          
+        }
       }
     }
   }
-}
 }
 `;
 
