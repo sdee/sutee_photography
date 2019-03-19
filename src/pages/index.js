@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { graphql } from 'gatsby'
 import styled from 'styled-components'
-
+import Img from "gatsby-image"
 import { Card, Header, Layout } from '../components'
 import config from '../../config/site'
 
@@ -36,20 +36,7 @@ const Index = (props) => (
   <Layout>
     <BG>
       <Content>
-        {console.log(props)}
-        {/* <Grid>
-          {edges.map((project, index) => (
-            <Card
-              delay={index}
-              date={project.node.frontmatter.date}
-              title={project.node.frontmatter.title}
-              cover={project.node.frontmatter.cover.childImageSharp.fluid}
-              path={project.node.fields.slug}
-              areas={project.node.frontmatter.areas}
-              key={project.node.fields.slug}
-            />
-          ))}
-        </Grid> */}
+        <Img fixed={props.data.images.edges[0].node.localFile.childImageSharp.fixed} />
       </Content>
     </BG>
   </Layout>
@@ -70,11 +57,19 @@ query IndexQuery {
   images:allS3Image {
     edges {
       node {
-        Key
-        Url
+          Url
+          Key
+          localFile {
+            childImageSharp {
+                fixed(width: 800, height: 534) {
+                  ...GatsbyImageSharpFixed
+              }
+            }
+          
       }
     }
   }
-} 
+}
+}
 `;
 
