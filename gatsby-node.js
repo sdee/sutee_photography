@@ -105,11 +105,12 @@ exports.createPages = async ({ graphql, actions }) => {
 
   const placeGalleryTemplate = require.resolve('./src/templates/placeGallery.js')
   places.forEach((place, index) => {
-
+    var placeRegex = '/'+place+'|'+'Cusco'+'/';
     createPage({
       path: place,
       component: placeGalleryTemplate,
       context: {
+        placeFilter: placeRegex,
         place: place
       }
     })

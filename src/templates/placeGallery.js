@@ -33,13 +33,12 @@ const InnerWrapper = styled.div`
   margin: 0 auto;
 `
 
-const PlaceGallery = ({ pageContext: { place }}) => {
-
+const PlaceGallery = (props) => {
+    console.log(props)
   return (
     <Layout customSEO>
-      
       <BG>
-        <Content><h1>{place}</h1></Content>
+        <Content><h1>{props.pageContext.place}</h1></Content>
       </BG>
     </Layout>
   )
@@ -52,8 +51,8 @@ PlaceGallery.propTypes = {
     place: PropTypes.string.isRequired,
   }),
   data: PropTypes.shape({
-
-  })
+    images: PropTypes.object.isRequired,
+  }).isRequired,
 }
 
 PlaceGallery.defaultProps = {
@@ -63,11 +62,25 @@ PlaceGallery.defaultProps = {
   }),
 }
 
-// export const pageQuery = graphql`
- 
-// query PlaceQuery {
-//     places {
-
-//     }
-// }
-// `
+export const pageQuery = graphql`
+query ($placeFilter: String!) {
+images:allS3Image (
+    filter: {
+        Url: {regex: $placeFilter}  
+    }
+    ) {
+      edges {
+        node {
+            Url 
+            localFile {
+              childImageSharp {
+                  fixed(width: 800, height: 534) {
+                    ...GatsbyImageSharpFixed
+                  }
+              }
+          }
+        }
+      }
+    }
+  }
+`
