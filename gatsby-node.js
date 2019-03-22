@@ -1,5 +1,6 @@
 const path = require('path')
 const _ = require('lodash')
+const gatsbyImage = require('gatsby-image')
 
 // graphql function doesn't throw an error so we have to check to check for the result.errors to throw manually
 const wrapper = promise =>
@@ -34,6 +35,7 @@ exports.onCreateNode = ({ node, actions }) => {
 }
 
 exports.createPages = async ({ graphql, actions }) => {
+  console.log('create pages')
   const { createPage } = actions
 
   const projectTemplate = require.resolve('./src/templates/project.js')
@@ -41,6 +43,26 @@ exports.createPages = async ({ graphql, actions }) => {
   const result = await wrapper(
     graphql(`
       {
+        images:allS3Image (filter:{Url:{regex:"/.*places.*/"}}) {
+          edges {
+            node {
+                Url 
+                Key
+                localFile {
+                  childImageSharp {
+                      fixed(width: 800, height: 534) {
+                          base64
+                          width
+                          height
+                          src
+                          srcSet
+                      
+                      }
+                  }
+              }
+            }
+          }
+        }
         projects: allMdx(sort: { fields: [frontmatter___date], order: DESC }) {
           edges {
             node {
@@ -57,10 +79,12 @@ exports.createPages = async ({ graphql, actions }) => {
       }
     `)
   )
-
+      console.log('>>>')
+      console.log(result)
   const projectPosts = result.data.projects.edges
 
   projectPosts.forEach((edge, index) => {
+    console.log(result.data.projects)
     const next = index === 0 ? null : projectPosts[index - 1].node
     const prev = index === projectPosts.length - 1 ? null : projectPosts[index + 1].node
 
@@ -74,6 +98,20 @@ exports.createPages = async ({ graphql, actions }) => {
         prev,
         next,
       },
+    })
+  })
+
+  const places = ['Canada', 'Peru']
+
+  const placeGalleryTemplate = require.resolve('./src/templates/placeGallery.js')
+  places.forEach((place, index) => {
+
+    createPage({
+      path: place,
+      component: placeGalleryTemplate,
+      context: {
+        place: place
+      }
     })
   })
 }
