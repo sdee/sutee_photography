@@ -1,6 +1,7 @@
 const path = require('path')
 const _ = require('lodash')
 const gatsbyImage = require('gatsby-image')
+const TreeModel = require('tree-model')
 
 // graphql function doesn't throw an error so we have to check to check for the result.errors to throw manually
 const wrapper = promise =>
@@ -10,6 +11,26 @@ const wrapper = promise =>
     }
     return result
   })
+
+const tree = new TreeModel()
+const treeRoot = tree.parse(
+  {
+    name: 'World', children: [
+      {
+        name: 'Peru', children: [
+          { name: 'Cusco'},
+          { name: 'Pisac' }
+        ]
+      },
+      {
+        name: 'Canada', children: [
+          {name: 'Banff'},
+          {name: 'Calgary'}
+        ]
+      }
+    ]
+  }
+);
 
 exports.onCreateNode = ({ node, actions }) => {
   const { createNodeField } = actions
@@ -79,8 +100,6 @@ exports.createPages = async ({ graphql, actions }) => {
       }
     `)
   )
-      console.log('>>>')
-      console.log(result)
   const projectPosts = result.data.projects.edges
 
   projectPosts.forEach((edge, index) => {
@@ -101,18 +120,28 @@ exports.createPages = async ({ graphql, actions }) => {
     })
   })
 
-  const places = ['Canada', 'Peru']
-
+  
   const placeGalleryTemplate = require.resolve('./src/templates/placeGallery.js')
-  places.forEach((place, index) => {
-    var placeRegex = '/'+place+'|'+'Cusco'+'/';
+
+  treeRoot.walk(function (place) {
+    const placeName = place.model.name;
+    // Halt the traversal by returning false
+    console.log('========')
+    console.log('walking ...')
+    console.log(place.model.name)
+    let children = place.all()
+    let subplaces = children.map(x => _.get(x,['model', 'name'])) 
+    console.log('subplaces')
+    console.log(subplaces)
+    let placeRegex = '/'+subplaces.join('|')+'/'
+    console.log(placeRegex)
     createPage({
-      path: place,
-      component: placeGalleryTemplate,
-      context: {
-        placeFilter: placeRegex,
-        place: place
-      }
-    })
-  })
+            path: placeName,
+            component: placeGalleryTemplate,
+            context: {
+              placeFilter: placeRegex,
+              place: placeName,
+            }
+          })
+})
 }

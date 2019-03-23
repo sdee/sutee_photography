@@ -33,12 +33,20 @@ const InnerWrapper = styled.div`
   margin: 0 auto;
 `
 
-const PlaceGallery = (props) => {
-    console.log(props)
+const PlaceGallery = ({ data: {
+    images: { edges },
+  }, pageContext: {place, placeFilter }
+}) => {
+
   return (
     <Layout customSEO>
       <BG>
-        <Content><h1>{props.pageContext.place}</h1></Content>
+        <Content><h1>{place}</h1>
+        {edges.map((img, idx) => (
+        <Img fixed={img.node.localFile.childImageSharp.fixed} />
+          ))}
+        </Content>
+
       </BG>
     </Layout>
   )
