@@ -60,82 +60,13 @@ exports.createPages = async ({ graphql, actions }) => {
   console.log('create pages')
   const { createPage } = actions
 
-  const projectTemplate = require.resolve('./src/templates/project.js')
-
-  const result = await wrapper(
-    graphql(`
-      {
-        images:allS3Image (filter:{Url:{regex:"/.*places.*/"}}) {
-          edges {
-            node {
-                Url 
-                Key
-                localFile {
-                  childImageSharp {
-                      fixed(width: 800, height: 534) {
-                          base64
-                          width
-                          height
-                          src
-                          srcSet
-                      
-                      }
-                  }
-              }
-            }
-          }
-        }
-        projects: allMdx(sort: { fields: [frontmatter___date], order: DESC }) {
-          edges {
-            node {
-              fileAbsolutePath
-              fields {
-                slug
-              }
-              frontmatter {
-                title
-              }
-            }
-          }
-        }
-      }
-    `)
-  )
-  const projectPosts = result.data.projects.edges
-
-  projectPosts.forEach((edge, index) => {
-    console.log(result.data.projects)
-    const next = index === 0 ? null : projectPosts[index - 1].node
-    const prev = index === projectPosts.length - 1 ? null : projectPosts[index + 1].node
-
-    createPage({
-      path: edge.node.fields.slug,
-      component: projectTemplate,
-      context: {
-        slug: edge.node.fields.slug,
-        // Pass the current directory of the project as regex in context so that the GraphQL query can filter by it
-        absolutePathRegex: `/^${path.dirname(edge.node.fileAbsolutePath)}/`,
-        prev,
-        next,
-      },
-    })
-  })
-
-  
   const placeGalleryTemplate = require.resolve('./src/templates/placeGallery.js')
 
   treeRoot.walk(function (place) {
     const placeName = place.model.name;
-    // Halt the traversal by returning false
-    console.log('========')
-    console.log('walking ...')
-    console.log(place.model.name)
     let children = place.all()
     let subplaces = children.map(x => _.get(x,['model', 'name'])) 
-    console.log('subplaces')
-    console.log(subplaces)
     let placeRegex = '/'+subplaces.join('|')+'/'
-    console.log(placeRegex)
     createPage({
             path: placeName,
             component: placeGalleryTemplate,
