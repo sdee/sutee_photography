@@ -4,9 +4,9 @@ import PropTypes from 'prop-types'
 import { graphql } from 'gatsby'
 import styled from 'styled-components'
 import Gallery from 'react-photo-gallery';
+import { GalleryWithLightBox } from '../components/index'
 
 import { Layout, ProjectHeader, ProjectPagination, SEO } from '../components'
-import config from '../../config/site'
 
 const BG = styled.div`
   background-color: ${props => props.theme.colors.bg};
@@ -46,7 +46,7 @@ console.log(images)
     <Layout customSEO>
       <BG>
         <Content><h1>{place}</h1>
-        <Gallery photos={images} direction='row'/>
+        <GalleryWithLightBox photos={images} direction='row'/>
         </Content>
 
       </BG>
