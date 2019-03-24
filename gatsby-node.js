@@ -27,7 +27,8 @@ const treeRoot = tree.parse(
           {name: 'Banff'},
           {name: 'Calgary'}
         ]
-      }
+      },
+      {name: 'Cuba'}
     ]
   }
 );

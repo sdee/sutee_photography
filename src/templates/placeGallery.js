@@ -3,6 +3,7 @@ import Img from 'gatsby-image'
 import PropTypes from 'prop-types'
 import { graphql } from 'gatsby'
 import styled from 'styled-components'
+import Gallery from 'react-photo-gallery';
 
 import { Layout, ProjectHeader, ProjectPagination, SEO } from '../components'
 import config from '../../config/site'
@@ -38,13 +39,14 @@ const PlaceGallery = ({ data: {
   }, pageContext: {place, placeFilter }
 }) => {
 
+    console.log(edges);
+ const images = edges.map((img, id) => {return {src: img.node.localFile.childImageSharp.fixed.src, width: 6, height: 4}} )
+console.log(images)
   return (
     <Layout customSEO>
       <BG>
         <Content><h1>{place}</h1>
-        {edges.map((img, idx) => (
-        <Img fixed={img.node.localFile.childImageSharp.fixed} />
-          ))}
+        <Gallery photos={images} direction='row'/>
         </Content>
 
       </BG>
