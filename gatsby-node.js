@@ -28,7 +28,7 @@ const treeRoot = tree.parse(
           {name: 'Calgary'}
         ]
       },
-      {name: 'Cuba'}
+      {name: 'Cuba', children: []}
     ]
   }
 );
@@ -64,9 +64,13 @@ exports.createPages = async ({ graphql, actions }) => {
 
   treeRoot.walk(function (place) {
     const placeName = place.model.name;
+    console.log('>>>')
+    console.log(placeName)
     let children = place.all()
-    let subplaces = children.map(x => _.get(x,['model', 'name'])) 
+    let subplaces = children.map(x => _.get(x,['model', 'name']))
+    console.log(subplaces)
     let placeRegex = '/'+subplaces.join('|')+'/'
+    console.log(placeRegex)
     createPage({
             path: placeName,
             component: placeGalleryTemplate,
