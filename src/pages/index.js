@@ -5,6 +5,8 @@ import styled from 'styled-components'
 import Img from "gatsby-image"
 import { Card, Header, Layout } from '../components'
 import config from '../../config/site'
+import Button from 'react-bootstrap/Button';
+import Carousel from 'react-bootstrap/Carousel'
 
 const Grid = styled.div`
   display: grid;
@@ -22,7 +24,10 @@ const Grid = styled.div`
 `
 
 const Content = styled.div`
-  margin: -6rem auto 0 auto;
+color: ${props => props.theme.colors.secondary};
+text-align: center;
+font-size: 0.9rem;
+  margin: 0rem auto 0 auto;
   max-width: ${props => props.theme.maxWidths.general};
   padding: 0 ${props => props.theme.contentPadding} 6rem;
   position: relative;
@@ -37,18 +42,25 @@ const Index = ({
     images: { edges },
   },
 }) => (
-  
-  <Layout>
-    <BG>
-      <Content>
-       {console.log(edges)}
+  <Layout customSEO>
+  <BG>
+    <Content>
+      <br/>
+      <h1>Sutee Dee</h1>
+    <Carousel controls={true}>
       {edges.map((img, idx) => (
-        <Img fixed={img.node.localFile.childImageSharp.fixed} />
-          ))}
-      </Content>
-    </BG>
-  </Layout>
-)
+        <Carousel.Item className='text-center'>
+          <Img className='img-fluid' fixed={img.node.localFile.childImageSharp.fixed} />
+        </Carousel.Item>)
+
+      )}
+
+    </Carousel>
+    </Content>
+
+      </BG>
+    </Layout>
+  )
 
 export default Index
 
@@ -62,14 +74,14 @@ Index.propTypes = {
 
 export const pageQuery = graphql`
 query IndexQuery {
-  images:allS3Image (filter:{Url:{regex:"/.*places.*/"}}) {
+  images:allS3Image (filter:{Url:{regex:"/.*Cuba.*/"}}) {
     edges {
       node {
           Url 
           Key
           localFile {
             childImageSharp {
-                fixed(width: 800, height: 534) {
+                fixed(width: 1200, height: 800 ) {
                   ...GatsbyImageSharpFixed
                 }
             }

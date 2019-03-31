@@ -6,6 +6,7 @@ import styled, { createGlobalStyle, ThemeProvider } from 'styled-components'
 import { SEO, Footer } from './index'
 import theme from '../../config/theme'
 import reset from '../styles/reset'
+import './bootstrap.min.css';
 
 const GlobalStyle = createGlobalStyle`
   ${reset}

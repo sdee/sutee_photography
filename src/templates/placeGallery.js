@@ -16,7 +16,7 @@ const BG = styled.div`
 
 const Content = styled.footer`
   color: ${props => props.theme.colors.secondary};
-  text-align: center;
+  text-align: left;
   font-size: 0.9rem;
   padding-top: 3rem;
   padding-bottom: 3rem;
@@ -38,7 +38,6 @@ const PlaceGallery = ({ data: {
     images: { edges },
   }, pageContext: {place, placeFilter }
 }) => {
-
     console.log(edges);
  const images = edges.map((img, id) => {return {src: img.node.localFile.childImageSharp.fixed.src, width: 6, height: 4}} )
 console.log(images)
