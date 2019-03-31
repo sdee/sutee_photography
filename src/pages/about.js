@@ -40,7 +40,7 @@ const About = ({
       <Content>
       <h1>About Me</h1>
       <p>I'm Sutee. I like combining things especially things that may not seem to go together at first.</p>
-      <p>I think it's easiest to get to know me by following one of these threads and seeing where they lead:</p>
+      <p>I think it's easiest to get to know me by following one of these threads and seeing where they lead. However, the best way to really know me is to travel with me, try my food, or look at my photos.</p>
       <h3>Sense of Place</h3>
       <p>I think a lot about places. I think about what makes a location a place-what gives it a sense of place, what makes it tick, what makes it work or not work. Mostly, I think where to go next. </p>
       <p>I grew up in Georgia (no, not Atlanta). My parents emigrated from Thailand, and my mom made sure my sister and I maintained a close connection to our people. I first visited as a baby. I do not remember that trip, but I remember many subsequent trips. That got me used to idea that your life does not have to be confined to one locale.</p>
