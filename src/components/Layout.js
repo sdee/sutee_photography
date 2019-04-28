@@ -13,10 +13,7 @@ const GlobalStyle = createGlobalStyle`
   
   html {
     font-family: "Montserrat", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-  }
-  
-  body {
-    background: url("${props => props.theme.bgPattern}") #000;
+    background-color: #16191f
   }
   
   h1, h2, h3, h4, h5, h6 {
@@ -42,7 +39,7 @@ const Layout = ({ children, customSEO }) => (
   <ThemeProvider theme={theme}>
     <>
       {!customSEO && <SEO />}
-      <GlobalStyle />
+      <GlobalStyle/>
       <noscript>To browse this site, please enable JavaScript.</noscript>
       <AbsoluteWrapper>
         {children}
