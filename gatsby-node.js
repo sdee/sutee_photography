@@ -28,8 +28,14 @@ const treeRoot = tree.parse(
           {name: 'Calgary'}
         ]
       },
-      {name: 'Cuba', children: []}
+      {name: 'Cuba', children: []},
+      {
+        name: 'Mexico', children: [
+          { name: 'Oaxaca'},
+        ]
+      },
     ]
+
   }
 );
 
@@ -64,8 +70,6 @@ exports.createPages = async ({ graphql, actions }) => {
 
   treeRoot.walk(function (place) {
     const placeName = place.model.name;
-    console.log('>>>')
-    console.log(placeName)
     let children = place.all()
     let subplaces = children.map(x => _.get(x,['model', 'name']))
     console.log(subplaces)
@@ -79,5 +83,6 @@ exports.createPages = async ({ graphql, actions }) => {
               place: placeName,
             }
           })
+    //create per tag
 })
 }

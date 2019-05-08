@@ -48,6 +48,7 @@ const Index = ({
       <br/>
       <h1>Sutee Dee</h1>
     <Carousel controls={true}>
+    {console.log(edges)}
       {edges.map((img, idx) => (
         <Carousel.Item className='text-center'>
           <Img className='img-fluid' fixed={img.node.localFile.childImageSharp.fixed} />

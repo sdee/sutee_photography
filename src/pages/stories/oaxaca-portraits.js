@@ -25,7 +25,7 @@ const Content = styled.footer`
 const OuterWrapper = styled.div`
   padding: 0 ${props => props.theme.contentPadding};
   margin: -10rem auto 0 auto;
-`
+  `
 
 const InnerWrapper = styled.div`
   position: relative;
@@ -33,7 +33,6 @@ const InnerWrapper = styled.div`
   margin: 0 auto;
 `
 const OaxacaPortraits= (props) => { 
-  console.log(props)
   const images = new Map([
     ['stride', props.data.horzStoryImages.edges[0].node.localFile.childImageSharp.fixed],
     ['costume', props.data.horzStoryImages.edges[1].node.localFile.childImageSharp.fixed],
@@ -44,18 +43,9 @@ const OaxacaPortraits= (props) => {
     ['garlic', props.data.vertStoryImages.edges[1].node.localFile.childImageSharp.fixed]
   ])
 
-
   // const coverImage = props.data.coverImage.edges[0].node.localFile.childImageSharp.fluid.src;
   const horzNodes = props.data.horizontalImages.edges.map((img, id) => {return {src: img.node.localFile.childImageSharp.fluid.src, width: 3, height: 2}} )
   const vertNodes = props.data.verticalImages.edges.map((img, id) => {return {src: img.node.localFile.childImageSharp.fluid.src, width: 4, height: 6}} )
-  console.log('NODES')
-
-  // const images = shuffle(horzNodes.concat(vertNodes))
-  // console.log('IMAGES')
-  // console.log(images)
-
-
-
   return (
   
   <Layout>

@@ -109,8 +109,8 @@ module.exports = {
   author: 'LekoArts', // Author for schema.org JSONLD
 
   // siteFBAppID: '123456789', // Facebook App ID - Optional
-  userTwitter: '@emilia', // Twitter Username
-  ogSiteName: 'emilia', // Facebook Site Name
+  // userTwitter: '@emilia', // Twitter Username
+  // ogSiteName: 'emilia', // Facebook Site Name
   ogLanguage: 'en_US', // og:language
   googleAnalyticsID: 'UA-12345689-1',
 

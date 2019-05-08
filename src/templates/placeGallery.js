@@ -35,10 +35,12 @@ const InnerWrapper = styled.div`
 `
 
 const PlaceGallery = ({ data: {
-    images: { edges },
+    images: { edges }, coverImg
   }, pageContext: {place, placeFilter }
 }) => {
     console.log(edges);
+    console.log('??')
+    console.log(coverImg)
  const images = edges.map((img, id) => {return {src: img.node.localFile.childImageSharp.fixed.src, width: 6, height: 4}} )
 console.log(images)
   return (
