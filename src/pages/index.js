@@ -42,23 +42,19 @@ const Index = ({
     images: { edges },
   },
 }) => (
-  <Layout customSEO>
-  <BG>
-    <Content>
-      <br/>
-      <h1>Sutee Dee</h1>
-    <Carousel controls={true}>
-    {console.log(edges)}
-      {edges.map((img, idx) => (
-        <Carousel.Item className='text-center'>
-          <Img className='img-fluid' fixed={img.node.localFile.childImageSharp.fixed} />
-        </Carousel.Item>)
-
-      )}
-
-    </Carousel>
-    </Content>
-
+    <Layout customSEO>
+      <BG>
+        <Content>
+          <br />
+          <h1>Sutee Dee</h1>
+          <Carousel controls={true}>
+            {edges.map((img, idx) => (
+              <Carousel.Item className='text-center'>
+                <Img className='img-fluid' fixed={img.node.localFile.childImageSharp.fixed} />
+              </Carousel.Item>)
+            )}
+          </Carousel>
+        </Content>
       </BG>
     </Layout>
   )
@@ -75,7 +71,7 @@ Index.propTypes = {
 
 export const pageQuery = graphql`
 query IndexQuery {
-  images:allS3Image (filter:{Url:{regex:"/.*Cuba.*/"}}) {
+  images:allS3Image (filter:{Url:{regex:"/Front/"}}) {
     edges {
       node {
           Url 
